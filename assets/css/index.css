@@ -1,0 +1,457 @@
+@font-face {
+    font-family: 'Omniglot Font';
+    src: url('../fonts/Omniglot Font/OmniglotFont.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+/*.................. Общие стили........................ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body
+ {
+   background: linear-gradient(to top, #000000, #000c1f, #1a2b3c);
+   font-family: 'Omniglot Font', Arial, sans-serif;
+   background-image: url(../images/backgroundmain.png);
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   overflow-x: hidden;/* Добавляем минимальную высоту */
+}
+
+main{
+  align-items: center;
+
+}
+
+/*.................. Шапка сайта........................ */
+
+header {
+    border: 0px solid;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: rgba(17, 17, 17, 0.9);
+    box-shadow: 0 0 10px rgba(88, 215, 255, 0.2);
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
+    position: relative;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.logo-img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.site-name {
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(90deg, rgba(176, 208, 240, 0.7), rgba(225, 242, 255, 0.7));
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: shine 30s linear infinite;
+}
+
+@keyframes shine {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/*.................. Навигация........................ */
+
+nav.nav {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+nav.nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav.nav ul li {
+    margin: 0 20px;
+}
+
+nav.nav ul li a {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
+
+nav.nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/*.................. Блок входа........................ */
+
+.sign_in {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sign_in ul {
+    display: block;
+    list-style: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.sign_in ul li {
+    margin: 0 10px;
+}
+
+.sign_in ul li a {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
+
+.sign_in ul li a:hover {
+    text-decoration: underline;
+}
+
+/*..................Контейнер для боковой панели и основного блока........................ */
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+
+}
+
+/*...................Боковая панель....................... */
+
+aside {
+    border: 0px;
+    border-radius: 8px;
+    background-color: rgba(17, 17, 17, 0.9);
+    box-shadow: 0 0 10px rgba(88, 215, 255, 0.2);
+    color: white;
+    text-align: center;
+
+}
+
+.sidebar {
+    position: sticky;
+    top: 20px;
+    min-width: 150px;
+    max-width: 300px;
+    width: max-content;
+    height:max-content;
+    padding: 20px;
+    margin-right: 20px;
+    background-color: rgba(17, 17, 17, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(88, 215, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.server-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.server-item {
+    display: flex;
+    padding: 15px 10px;
+    margin: 10px 0;
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+    text-align: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        max-width: 100%;
+        position: static;
+        margin-bottom: 20px;
+    }
+    
+    .server-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .server-item {
+        flex: 1 1 auto;
+        white-space: normal;
+    }
+}
+/*..................Основной блок с каруселью....................... */
+
+.content {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    background-color: rgba(17, 17, 17, 0.9);
+    color: #d7e9ff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(88, 215, 255, 0.2);
+    text-align: center;
+    align-items: center;
+    z-index: 2;
+
+
+}
+
+.content h1 {
+    margin-bottom: 20px;
+
+}
+
+/*..................Карусель........................ */
+
+.carouseltitle {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.custom-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.carousel-block {
+    width: 30%;
+    text-align: center;
+}
+
+.carousel-block img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.carousel-control.prev {
+    left: 10px;
+}
+
+.carousel-control.next {
+    right: 10px;
+}
+
+/* Адаптивность для карусели */
+@media (max-width: 768px) {
+    .carousel-slide {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .carousel-block {
+        width: 80%;
+    }
+}
+
+/*....................Блоки с фото и текстом...................... */
+.photo-text-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.photo-text-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transform: translateX(-50%);
+    animation: fadeIn 1.5s ease-out forwards;
+}
+
+.photo-text-item:nth-child(1) { animation-delay: 0.5s; }
+.photo-text-item:nth-child(2) { animation-delay: 1s; }
+.photo-text-item:nth-child(3) { animation-delay: 1.5s; }
+
+.photo-text-item img {
+    width: 45%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.text-content {
+    width: 50%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.text-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.text-content p {
+    font-size: 16px;
+}
+
+/* Анимация плавного появления */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Адаптивные стили для фото и текста */
+@media (max-width: 768px) {
+    .photo-text-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .photo-text-item img {
+        width: 80%;
+    }
+
+    .text-content {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+bold {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/*..................Подвал........................ */
+
+footer {
+    background-color: rgba(17, 17, 17, 0.9);
+    box-shadow: 0 0 10px rgba(88, 215, 255, 0.2);
+    padding: 40px;
+    z-index: 1;
+    position: relative; /* Убедитесь, что футер не выходит за границы */
+    width: 100%;
+    flex-shrink: 0; /* Запрещаем футеру сжиматься */
+    border-top-left-radius: 10px;    
+    border-top-right-radius: 10px; 
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.footer-section {
+    width: 30%;
+
+}
+
+.footertittle{
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.footer-section h1 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: transparent;
+    background: linear-gradient(90deg, rgba(176, 208, 240, 0.7), rgba(225, 242, 255, 0.7));
+    background-size: 200%;
+    -webkit-background-clip: text;
+    animation: shine 30s linear infinite;
+}
+
+.footer-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.footer-section a {
+    display: block;
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+.footer-bottom p {
+    font-size: 14px;
+    color: #bbb;
+}
