@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Профиль</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Личный кабинет</h2>
+        <div id="profileData">Загрузка...</div>
+        <button onclick="logout()">Выйти</button>
+    </div>
+
+    <script>
+        // Проверка авторизации при загрузке
+        async function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/me', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (!response.ok) throw new Error();
+                
+                const user = await response.json();
+                document.getElementById('profileData').innerHTML = `
+                    <p>Email: ${user.email}</p>
+                `;
+            } catch (error) {
+                localStorage.removeItem('token');
+                window.location.href = 'login.html';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = 'login.html';
+        }
+
+        // Запуск проверки при загрузке страницы
+        checkAuth();
+    </script>
+</body>
+</html>

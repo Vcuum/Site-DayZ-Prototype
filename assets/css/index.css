@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Omniglot Font';
-    src: url('../fonts/Omniglot Font/OmniglotFont.ttf') format('truetype');
+    src: url('/assets/fonts/Omniglot Font/OmniglotFont.ttf') format('truetype');
     font-weight: 100;
     font-style: normal;
 }
@@ -18,16 +18,11 @@ body
  {
    background: linear-gradient(to top, #000000, #000c1f, #1a2b3c);
    font-family: 'Omniglot Font', Arial, sans-serif;
-   background-image: url(../images/backgroundmain.png);
+   background-image: url(/assets/images/backgroundmain.png);
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
    overflow-x: hidden;/* Добавляем минимальную высоту */
-}
-
-main{
-  align-items: center;
-
 }
 
 /*.................. Шапка сайта........................ */
@@ -353,30 +348,7 @@ aside {
     font-size: 16px;
 }
 
-/* Анимация плавного появления */
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
 
-/* Адаптивные стили для фото и текста */
-@media (max-width: 768px) {
-    .photo-text-item {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .photo-text-item img {
-        width: 80%;
-    }
-
-    .text-content {
-        width: 100%;
-        text-align: center;
-    }
-}
 
 bold {
     font-size: 20px;
@@ -442,7 +414,7 @@ footer {
 
 .footer-section a:hover {
     color: #fff;
-}
+}                                                                                                                                                                                       
 
 .footer-bottom {
     text-align: center;
@@ -454,4 +426,30 @@ footer {
 .footer-bottom p {
     font-size: 14px;
     color: #bbb;
+}
+
+
+/* Анимация плавного появления */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Адаптивные стили для фото и текста */
+@media (max-width: 768px) {
+    .photo-text-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .photo-text-item img {
+        width: 80%;
+    }
+
+    .text-content {
+        width: 100%;
+        text-align: center;
+    }
 }
