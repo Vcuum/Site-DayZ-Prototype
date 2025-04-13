@@ -6,7 +6,7 @@
     <title>Moonlight Owls | DayZ</title>
 
     <!-- Стили -->
-    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/faq/faq.css">
     <link rel="stylesheet" href="/assets/css/modal.css">
 
     <!-- Иконки -->
@@ -33,9 +33,9 @@
         <!-- Основная навигация -->
         <nav class="nav">
             <ul>
-                <li><a href="/aboutservs/">Описание серверов</a></li>
-                <li><a href="/faq/">Гайды для новичков</a></li>
-                <li><a href="/news/">Новости</a></li>
+              <li><a href="/aboutservs/">Описание серверов</a></li>
+              <li><a href="/faq/">Гайды для новичков</a></li>
+              <li><a href="/news/">Новости</a></li>
             </ul>
         </nav>
 
@@ -50,51 +50,38 @@
     </header>
 
     <!-- Основной контейнер -->
-    <div class="container">
-        <!-- Боковая панель -->
-        <aside class="asidebar asideLeft">
-            <div class="containerServerList">
-                <h2>Наши Сервера</h2>
-                <ul class="server-list">
-                    <!-- Список серверов будет заполнен через JS -->
-                </ul>
-            </div>
-        </aside>
-
+    
         <!-- Основной контент -->
         <main class="content">
-            <!-- Карусель -->
-            <h2>Последние обновления</h3>
-            <div class="carousel-container">
-                <div class="custom-carousel">
-                    <div class="carousel-inner"></div>
-                    <button class="carousel-control prev">‹</button>
-                    <button class="carousel-control next">›</button>
-                </div>
+            <div class="asideListFaq">
+                <ul>
+                    <button data-target="guide1">Основы выживания</button>
+                    <button data-target="guide2">Строительство</button>
+                    <button data-target="guide3">Видео-гайд</button>
+                </ul>
             </div>
-
-            <!-- Блок с фотографиями и текстом -->
-            <div class="photo-text-blocks">
-                <div class="photo-text-item">
-                    <img src="/assets/images/hq720.jpg" alt="Фото 1">
-                    <div class="text-content">
-                        <h2>Если вы устали от перегруженных модовых серверов DayZ?</h2>
-                        <p><b>Тогда</b> вы в нужном месте. У нас приходится бороться за каждый ресурс. Можно насладиться интересным и веселым игровым процессом!</p>
-                    </div>
+        
+            <div class="modalContentFaq">
+                <!-- Контент для каждой кнопки -->
+                <div id="guide1" class="content-block hidden">
+                    <h2>Основы выживания</h2>
+                    <img src="/assets/images/survival.jpg" alt="Выживание">
+                    <p>Текст гайда...</p>
                 </div>
-
-                <div class="photo-text-item">
-                    <img src="/assets/images/hq7201.jpg" alt="Фото 2">
-                    <div class="text-content">
-                        <h2>Сталкивались с хамским отношением?</h2>
-                        <p><b>Так</b> вот забудь! Наш сервер — это место, где честная и отзывчивая администрация.</p>
-                    </div>
+        
+                <div id="guide2" class="content-block hidden">
+                    <h2>Строительство</h2>
+                    <img src="/assets/images/build.jpg" alt="Строительство">
+                    <p>Текст гайда...</p>
+                </div>
+        
+                <div id="guide3" class="content-block hidden">
+                    <h2>Видео-гайд</h2>
+                    <iframe src="https://youtube.com/embed/..." allowfullscreen></iframe>
                 </div>
             </div>
         </main>
-        <aside class="asidebar"></aside>
-    </div>
-
+        
     <!-- Footer -->
     <footer>
       <div class="footer-content">

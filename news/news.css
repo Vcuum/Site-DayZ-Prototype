@@ -1,0 +1,8 @@
+@import url(/assets/css/index.css);
+
+.content {
+    margin: auto;
+    width: 80vw;
+    max-width: 80vw;
+    min-height: 80vh;
+}

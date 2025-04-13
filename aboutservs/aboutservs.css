@@ -1,0 +1,48 @@
+@import url(/assets/css/index.css);
+
+
+.content {
+    margin: auto;
+    width: 80vw;
+    max-width: 80vw;
+    min-height: 80vh;
+}
+
+.contentBlockFirst {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    border-bottom: 1px solid gray;
+    margin: auto;
+    text-align: start;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.contentBlockFirst p{
+    padding: 0;
+    margin: 20px 0;
+}
+
+.contentBlockFirst li{
+    padding: 10px;
+}
+
+.serversDescriptBlock {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    margin: auto;
+    text-align: start;
+}
+
+.serversDescriptBlock p{
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.serversDescript {
+    margin:20px 0;
+    padding: 0;
+}
