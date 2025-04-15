@@ -338,4 +338,72 @@ document.addEventListener('DOMContentLoaded', () => {
     firstContentBlock.classList.add('active');
     buttons[0].classList.add('active-btn');
   }
+
+  const registerForm = document.getElementById('registerForm');
+  const loginForm = document.getElementById('loginForm');
+
+  if (registerForm) {
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = registerForm.querySelector('input[type="text"]').value;
+      const email = registerForm.querySelector('input[type="email"]').value;
+      const password = registerForm.querySelector('input[type="password"]').value;
+
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+        console.log('[Register] Ответ от сервера:', data);
+
+        if (response.ok) {
+          alert('Регистрация прошла успешно!');
+          registerForm.reset();
+          document.getElementById('registerModal').style.display = 'none';
+        } else {
+          alert(data.message || 'Ошибка при регистрации');
+        }
+      } catch (error) {
+        console.error('[Register] Ошибка:', error);
+        alert('Ошибка подключения к серверу');
+      }
+    });
+  }
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = loginForm.querySelector('input[type="email"]').value;
+      const password = loginForm.querySelector('input[type="password"]').value;
+
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        console.log('[Login] Ответ от сервера:', data);
+
+        if (response.ok && data.token) {
+          localStorage.setItem('token', data.token);
+          alert('Успешный вход!');
+          loginForm.reset();
+          document.getElementById('loginModal').style.display = 'none';
+          window.location.reload();
+        } else {
+          alert(data.message || 'Ошибка входа');
+        }
+      } catch (error) {
+        console.error('[Login] Ошибка:', error);
+        alert('Ошибка подключения к серверу');
+      }
+    });
+  }
 });

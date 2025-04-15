@@ -17,9 +17,9 @@
  }));
 
  //Подключение к MongoDB
- mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("MongoDB подключен"))
-    .catch(err => console.log("Ошибка подключения к MongoDB:", err));
+ mongoose.connect(process.env.MONGO_URI) 
+   .then(() => console.log("MongoDB подключен"))
+   .catch(err => console.log("Ошибка подключения к MongoDB:", err));
 
  const authRoutes = require('./routes/authRoutes');
  app.use("/api/auth", authRoutes);
