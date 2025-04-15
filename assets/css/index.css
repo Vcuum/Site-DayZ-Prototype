@@ -221,8 +221,7 @@ nav.nav ul li a:hover {
 /*..................Основной блок с каруселью....................... */
 
 .content {
-    width: 100%;
-    width: 1000px;
+    width: 60%;
     max-width: 90%;
     padding: 20px;
     background-color: rgba(17, 17, 17, 0.9);
@@ -251,23 +250,22 @@ nav.nav ul li a:hover {
 }
 
 .custom-carousel {
-    position: relative;
-    width: 100%;
+    max-width: 960px; /* 3 * 320 */
     overflow: hidden;
+    margin: 0 auto;
+    position: relative;
     border-radius: 10px;
 }
 
 .carousel-inner {
     display: flex;
     transition: transform 0.5s ease;
-    width: 100%;
+    will-change: transform;
+    overflow: hidden;
 }
 
 .carousel-slide {
-    min-width: 100%;
-    padding: 20px;
-    background: none;
-    box-sizing: border-box;
+    display: flex;
 }
 
 .slide-title {
@@ -285,24 +283,38 @@ nav.nav ul li a:hover {
 
 .carousel-block {
     width: 30%;
-    text-align: center;
-    background: rgba(0,0,0,0.5);
-    padding: 15px;
-    border-radius: 8px;
+    display: inline-block;
+    vertical-align: top;
+    text-decoration: none;
+    color: inherit;
+    margin: 10px;
 }
 
 .carousel-block img {
     width: 100%;
-    max-height: 150px;
+    height: 180px;
     object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-radius: 8px;
 }
 
-.carousel-block p {
-    color: #ddd;
-    font-size: 16px;
-}
+
+
+.carousel-content {
+    padding: 8px;
+  }
+  
+  .carousel-title {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 4px 0;
+  }
+  
+  .carousel-meta {
+    font-size: 12px;
+    color: #666;
+    display: flex;
+    justify-content: space-between;
+  }
 
 .carousel-control {
     position: absolute;
@@ -358,6 +370,7 @@ nav.nav ul li a:hover {
     opacity: 0;
     transform: translateX(-50%);
     animation: fadeIn 1.5s ease-out forwards;
+    margin: 0 20px;
 }
 
 .photo-text-item:nth-child(1) { animation-delay: 0.5s; }
@@ -366,6 +379,7 @@ nav.nav ul li a:hover {
 
 .photo-text-item img {
     width: 45%;
+    max-width: 350px;
     height: 200px;
     object-fit: cover;
     border-radius: 10px;
@@ -399,6 +413,8 @@ bold {
 /*..................Подвал........................ */
 
 footer {
+    position: absolute;
+    bottom:0px;
     background-color: rgba(17, 17, 17, 0.9);
     box-shadow: 0 0 10px rgba(88, 215, 255, 0.2);
     padding: 40px;

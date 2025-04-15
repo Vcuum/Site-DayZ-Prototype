@@ -49,11 +49,18 @@
       </div>
     </header>
 
-    <!-- Основной контейнер -->
     <div class="container">
-        <!-- Основной контент -->
         <main class="content">
-           
+                <!-- Единая секция для всех новостей -->
+            <section class="mixed-news-section">
+                <h2>Все новости</h2>
+                <div class="unified-grid" id="mixedNewsContainer">
+                    <div class="news-loader">
+                        <div class="loader-spinner"></div>
+                        <p>Загрузка новостей...</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -71,7 +78,6 @@
         <div class="footer-section">
             <h2>Социальные сети</h2>
             <p>
-                <a href="https://vk.com/" target="_blank">VK</a>
                 <a href="https://www.youtube.com/" target="_blank">YouTube</a>
             </p>
         </div>
@@ -105,6 +111,7 @@
     </div>
 
     <!-- Скрипты -->
-    <script src="/assets/js/main.js"></script>
+    <script type="module" src="/assets/js/main.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>
