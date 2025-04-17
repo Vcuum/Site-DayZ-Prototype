@@ -47,7 +47,7 @@ exports.signup = async (req, res) => {
         const confirmToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: "1d",
         });
-        const confirmLink = `http://localhost:000/api/auth/confirm/${confirmToken}`;
+        const confirmLink = `http://moonlight-owls.site/api/auth/confirm/${confirmToken}`;
 
         // Отправка письма
         const transporter = nodemailer.createTransport({
