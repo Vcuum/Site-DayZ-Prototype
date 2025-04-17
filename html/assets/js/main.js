@@ -184,7 +184,7 @@ function checkAuth() {
   if (token && authLinks) {
     authLinks.innerHTML = `
       <ul>
-        <li><a href="/pages/profile.html">Профиль</a></li>
+        <li><a href="/profile/profile.html">Профиль</a></li>
         <li><a href="#" id="logoutLink">Выйти</a></li>
       </ul>
     `;
@@ -351,21 +351,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = registerForm.querySelector('input[type="password"]').value;
 
       try {
-        const response = await fetch('http://localhost:5000/api/auth/signup', {
+        console.log('[Register] Попытка отправки запроса:', {
+          username, email, password,
+          endpoint: '/api/auth/signup'
+        });
+      
+        const response = await fetch('/api/auth/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, email, password })
         });
-
+      
+        console.log('[Register] HTTP статус:', response.status);
+      
         const data = await response.json();
         console.log('[Register] Ответ от сервера:', data);
-
+      
         if (response.ok) {
           alert('Регистрация прошла успешно!');
           registerForm.reset();
           document.getElementById('registerModal').style.display = 'none';
         } else {
-          alert(data.message || 'Ошибка при регистрации');
+          alert(data.message || `Ошибка регистрации (${response.status})`);
         }
       } catch (error) {
         console.error('[Register] Ошибка:', error);
@@ -382,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = loginForm.querySelector('input[type="password"]').value;
 
       try {
-        const response = await fetch('http://localhost:5000/api/auth/login', {
+        const response = await fetch('/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })

@@ -11,10 +11,12 @@
  //Middleware
  app.use(express.json()); // Для парсинга JSON
 
- app.use(cors({ // Укажите ваш домен фронтенда
-   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-   allowedHeaders: ['Content-Type', 'Authorization']
- }));
+ app.use(cors());
+
+//  app.use(cors({ // Укажите ваш домен фронтенда
+//    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//    allowedHeaders: ['Content-Type', 'Authorization']
+//  }));
 
  //Подключение к MongoDB
  mongoose.connect(process.env.MONGO_URI) 

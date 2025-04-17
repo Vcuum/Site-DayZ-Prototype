@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Omniglot Font';
-    src: url('/assets/fonts/Omniglot Font/OmniglotFont.ttf') format('truetype');
+    src: url('../fonts/Omniglot Font/OmniglotFont.ttf') format('truetype');
     font-weight: 100;
     font-style: normal;
 }
@@ -18,7 +18,7 @@ body
  {
    background: linear-gradient(to top, #000000, #000c1f, #1a2b3c);
    font-family: 'Omniglot Font', Arial, sans-serif;
-   background-image: url(/assets/images/backgroundmain.png);
+   background-image: url(../images/backgroundmain.png);
    background-size: cover;
    background-position: center;
    background-repeat: no-repeat;
