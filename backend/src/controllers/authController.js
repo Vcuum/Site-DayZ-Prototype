@@ -39,6 +39,7 @@ exports.signup = async (req, res) => {
 
         // Хеширование пароля
         const hashedPassword = await bcrypt.hash(password, 10);
+        console.log("[Лог] Хеш созданного пароля:", hashedPassword);
 
         // Создание пользователя
         const user = await User.create({ email, password: hashedPassword, username,isVerified: false});
@@ -79,27 +80,29 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log("Попытка входа для email:", email); // Логируем email
+        console.log("[Лог] Запрос на вход. Email:", email, "Пароль:", password);
 
         // Поиск пользователя с явным запросом пароля
         const user = await User.findOne({ email }).select('+password');
         if (!user) {
-            console.log("Пользователь не найден");
+            console.log("[Ошибка] Пользователь не найден");
             return res.status(400).json({ message: "Неверный email или пароль" });
         }
 
-        console.log("Статус верификации из БД:", user.isVerified); // Проверяем isVerified
+        console.log("[Лог] Хеш пароля из БД:", user.password);
 
-        // Проверка пароля
+        // Сравнение паролей
         const isMatch = await bcrypt.compare(password, user.password);
+        console.log("[Лог] Результат сравнения паролей:", isMatch);
+
         if (!isMatch) {
-            console.log("Пароль не совпадает");
+            console.log("[Ошибка] Пароль не совпадает");
             return res.status(400).json({ message: "Неверный email или пароль" });
         }
 
         // Проверка подтверждения аккаунта
         if (!user.isVerified) {
-            console.log("Аккаунт не подтверждён, несмотря на подтверждение через почту");
+            console.log("[Ошибка] Аккаунт не подтверждён");
             return res.status(403).json({ message: "Аккаунт не подтвержден" });
         }
 
@@ -107,7 +110,7 @@ exports.login = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
         res.status(200).json({ token });
     } catch (error) {
-        console.error("Ошибка входа:", error);
+        console.error("[Критическая ошибка] Вход:", error);
         res.status(500).json({ message: "Ошибка сервера" });
     }
 };
