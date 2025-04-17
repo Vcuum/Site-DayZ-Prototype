@@ -47,7 +47,7 @@ exports.signup = async (req, res) => {
         const confirmToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: "1d",
         });
-        const confirmLink = `http://moonlight-owls.site/api/auth/confirm/${confirmToken}`;
+        const confirmLink = `https://moonlight-owls.site/api/auth/confirm/${confirmToken}`;
 
         // Отправка письма
         const transporter = nodemailer.createTransport({
@@ -79,31 +79,35 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log("Попытка входа для email:", email); // Логируем email
 
-        //Поиск пользователя 
-        const user = await User.findOne({ email });
+        // Поиск пользователя с явным запросом пароля
+        const user = await User.findOne({ email }).select('+password');
         if (!user) {
+            console.log("Пользователь не найден");
             return res.status(400).json({ message: "Неверный email или пароль" });
         }
 
-        //Проверка пароля
+        console.log("Статус верификации из БД:", user.isVerified); // Проверяем isVerified
+
+        // Проверка пароля
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch){
-            return res.status(400).json({ message: "Неверный email или пароль"});
+        if (!isMatch) {
+            console.log("Пароль не совпадает");
+            return res.status(400).json({ message: "Неверный email или пароль" });
         }
 
+        // Проверка подтверждения аккаунта
         if (!user.isVerified) {
-            return res.status(403).json({ message: "Аккаунт не подтвержден. Проверьте вашу почту." });
+            console.log("Аккаунт не подтверждён, несмотря на подтверждение через почту");
+            return res.status(403).json({ message: "Аккаунт не подтвержден" });
         }
 
-
-       //Генерация JWT токена 
-       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "1d",
-       });
-
-       res.status(200).json({ token });
+        // Генерация токена
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        res.status(200).json({ token });
     } catch (error) {
-        res.status(500).json({ message: "Ошибка сервера"});
+        console.error("Ошибка входа:", error);
+        res.status(500).json({ message: "Ошибка сервера" });
     }
 };
