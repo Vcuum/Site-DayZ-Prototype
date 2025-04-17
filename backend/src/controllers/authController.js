@@ -107,7 +107,11 @@ exports.login = async (req, res) => {
         }
 
         // Генерация токена
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        const tokenExpiresIn = rememberMe ? "7d" : "1d"; // 7 дней или 1 день
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: tokenExpiresIn,
+        });
+
         res.status(200).json({ token });
     } catch (error) {
         console.error("[Критическая ошибка] Вход:", error);
