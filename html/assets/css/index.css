@@ -14,15 +14,24 @@
 
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 body
  {
    background: linear-gradient(to top, #000000, #000c1f, #1a2b3c);
    font-family: 'Omniglot Font', Arial, sans-serif;
    background-image: url(../images/backgroundmain.png);
-   background-size: cover;
+   background-size: auto;
    background-position: center;
    background-repeat: no-repeat;
    overflow-x: hidden;/* Добавляем минимальную высоту */
+   background-color: #000;
 }
 
 /*.................. Шапка сайта........................ */
@@ -34,7 +43,7 @@ header {
     background-color: rgba(17, 17, 17, 0.9);
     box-shadow: 0 0 10px rgba(88, 215, 255, 0.2);
     color: white;
-    padding: 10px 20px;
+    padding: 5px 20px;
     width: 100%;
     position: relative;
     z-index: 1000;
@@ -220,7 +229,12 @@ nav.nav ul li a:hover {
 }
 /*..................Основной блок с каруселью....................... */
 
+main.content {
+    flex: 1 0 auto; /* растягивается, занимает оставшееся пространство */
+}
+
 .content {
+    margin: auto;
     width: 60%;
     max-width: 90%;
     padding: 20px;
@@ -417,7 +431,7 @@ footer {
     bottom:0px;
     background-color: rgba(17, 17, 17, 0.9);
     box-shadow: 0 0 10px rgba(88, 215, 255, 0.2);
-    padding: 40px;
+    padding: 15px 30px;
     z-index: 1;
     position: relative; /* Убедитесь, что футер не выходит за границы */
     width: 100%;

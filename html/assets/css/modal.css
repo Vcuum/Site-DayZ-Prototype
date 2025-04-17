@@ -73,3 +73,34 @@
   .modal-content button:hover {
     background-color: rgba(51, 205, 252, 0.2);;
   }
+
+  .requirements {
+    font-size: 12px;
+    color: #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .requirements.valid {
+    color: green;
+  }
+  
+  .requirements.invalid {
+    color: red;
+  }
+
+  .requirements ul {
+    padding-left: 20px;
+    margin: 0;
+    list-style: none;
+  }
+  
+  .requirements li::before {
+    content: "❌ ";
+    color: red;
+  }
+  
+  .requirements li.valid::before {
+    content: "✅ ";
+    color: green;
+  }
+  

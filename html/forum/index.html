@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Форум | Moonlight Owls</title>
+    <link rel="stylesheet" href="./forum.css" />
+    <link rel="stylesheet" href="../assets/css/modal.css">
+    <!-- Иконки -->
+    <link rel="apple-touch-icon" sizes="57x57" href="../assets/images/icons/apple-icon-57x57.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/icons/favicon-16x16.png">
+    <meta name="theme-color" content="#ffffff">  
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+          <!-- Логотип -->
+          <a href="../" class="logo">
+              
+              <img src="../assets/images/Logo-170x220.png" alt="Логотип" class="logo-img">
+              <span class="site-name">Moonlight Owls | DayZ</span>
+          </a>
+  
+          <!-- Основная навигация -->
+          <nav class="nav">
+              <ul>
+                  <li><a href="../aboutservs/">Описание серверов</a></li>
+                  <li><a href="../faq/">Гайды для новичков</a></li>
+                  <li><a href="../news/">Новости</a></li>
+                  <li><a href="#">Форум</a></li>
+              </ul>
+          </nav>
+  
+          <!-- Навигация для авторизации -->
+          <div class="sign_in">
+              <ul>
+                  <li><a href="#" id="loginBtn">Вход</a></li>
+                  <li><a href="#" id="registerBtn">Регистрация</a></li>
+              </ul>
+          </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="content">
+            <h1>Форум</h1>
+            <div id="forum-container">
+            <p>Добро пожаловать на форум! Здесь будет список тем, кнопка "Создать тему", и т.д.</p>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+          <div class="footer-section">
+              <h2>Контакты</h2>
+              <p>Администрация сервера всегда на связи</p>
+          </div>
+          <div class="footer-section">
+              <h2>О нас</h2>
+              <p>Moonlight Owls — это команда, которая разрабатывает уникальные серверы для игры DayZ.</p>
+          </div>
+          <div class="footer-section">
+              <h2>Социальные сети</h2>
+              <p>
+                  <a href="https://vk.com/" target="_blank">VK</a>
+                  <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+              </p>
+          </div>
+        </div>
+    </footer>
+  
+    <!-- Модальные окна -->
+    <div id="loginModal" class="modal">
+          <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Вход</h2>
+              <form id="loginForm">
+                  <input type="email" placeholder="Email" required>
+                  <input type="password" placeholder="Пароль" required>
+                  <button type="submit">Войти</button>
+              </form>
+          </div>
+    </div>
+      
+    <div id="registerModal" class="modal">
+          <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Регистрация</h2>
+              <form id="registerForm">
+                  <input type="text" id="regUsername" placeholder="Имя пользователя" required onfocus="showReq('user')" onblur="hideReq()" />
+                      <div id="userReq" class="requirements">
+                          <ul>
+                            <li id="userLength" class="invalid">Минимум 3 символа</li>
+                            <li id="userChars" class="invalid">Только латинские буквы и цифры</li>
+                          </ul>
+                      </div>
+              
+                  <input type="email" placeholder="Email" required>
+              
+                  <input type="password" id="regPassword" placeholder="Пароль" required onfocus="showReq('pass')" onblur="hideReq()"  />
+                      <div id="passReq" class="requirements">
+                          <ul>
+                            <li id="passLength" class="invalid">Минимум 6 символов</li>
+                            <li id="passLetter" class="invalid">Хотя бы одна буква</li>
+                            <li id="passDigit" class="invalid">Хотя бы одна цифра</li>
+                          </ul>
+                      </div>
+              
+                  <button type="submit">Зарегистрироваться</button>
+              </form>
+          </div>
+    </div>
+    <script type="module" src="../assets/js/main.js"></script>
+</body>
+</html>

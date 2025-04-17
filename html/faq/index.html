@@ -36,6 +36,7 @@
               <li><a href="../aboutservs/">Описание серверов</a></li>
               <li><a href="#">Гайды для новичков</a></li>
               <li><a href="../news/">Новости</a></li>
+              <li><a href="../forum/">Форум</a></li>
             </ul>
         </nav>
 
@@ -121,15 +122,31 @@
             <span class="close">&times;</span>
             <h2>Регистрация</h2>
             <form id="registerForm">
-                <input type="text" placeholder="Имя пользователя" required>
+                <input type="text" id="regUsername" placeholder="Имя пользователя" required onfocus="showReq('user')" onblur="hideReq()" oninput="validateUsername()" />
+                    <div id="userReq" class="requirements">
+                        <ul>
+                          <li id="userLength" class="invalid">Минимум 3 символа</li>
+                          <li id="userChars" class="invalid">Только буквы и цифры</li>
+                        </ul>
+                    </div>
+            
                 <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Пароль" required>
+            
+                <input type="password" id="regPassword" placeholder="Пароль" required onfocus="showReq('pass')" onblur="hideReq()" oninput="validatePassword()" />
+                    <div id="passReq" class="requirements">
+                        <ul>
+                          <li id="passLength" class="invalid">Минимум 6 символов</li>
+                          <li id="passLetter" class="invalid">Хотя бы одна буква</li>
+                          <li id="passDigit" class="invalid">Хотя бы одна цифра</li>
+                        </ul>
+                    </div>
+            
                 <button type="submit">Зарегистрироваться</button>
-            </form>
+            </form>            
         </div>
     </div>
 
     <!-- Скрипты -->
-    <script src="../assets/js/main.js"></script>
+    <script type="module" src="../assets/js/main.js"></script>
 </body>
 </html>

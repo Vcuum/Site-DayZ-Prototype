@@ -134,7 +134,7 @@ function updateCarouselFromNews(news) {
 
   carouselInner.innerHTML = allSlides.map(item => `
     <a class="carousel-block" href="${item.link}" target="_blank" rel="noopener noreferrer">
-      <img src="${item.imageUrl || '/assets/images/default-news.png'}" alt="Изображение новости">
+      <img src="${item.imageUrl || './assets/images/default-news.png'}" alt="Изображение новости">
       <div class="carousel-content">
         <p class="carousel-title">${item.title}</p>
         <div class="carousel-meta">
@@ -159,6 +159,8 @@ function initModals() {
   const loginBtn = document.getElementById('loginBtn');
   const registerBtn = document.getElementById('registerBtn');
   const closeBtns = document.querySelectorAll('.close');
+
+  
 
   if (loginBtn) loginBtn.addEventListener('click', () => loginModal.style.display = 'block');
   if (registerBtn) registerBtn.addEventListener('click', () => registerModal.style.display = 'block');
@@ -299,9 +301,9 @@ function renderNews(container, news) {
   container.innerHTML = news.map(item => `
     <a href="${item.link}" target="_blank" class="news-card">
       <div class="news-thumbnail">
-        <img src="${item.imageUrl || '/assets/images/default-news.png'}" 
+        <img src="${item.imageUrl || '../assets/images/default-news.png'}" 
              alt="Превью новости" 
-             onerror="this.src='/assets/images/default-news.png'">
+             onerror="this.src='../assets/images/default-news.png'">
       </div>
       <span class="news-source">${item.source}</span>
       <h4 class="news-title">${item.title}</h4>
@@ -310,6 +312,56 @@ function renderNews(container, news) {
     </a>
   `).join('');
 }
+
+function showReq(type) {
+  const el = type === 'user' ? 'userReq' : 'passReq';
+  document.getElementById(el).style.display = 'block';
+}
+
+function hideReq() {
+  document.getElementById('userReq').style.display = 'none';
+  document.getElementById('passReq').style.display = 'none';
+}
+
+function validateUsername() {
+  const usernameInput = document.getElementById("regUsername");
+  const userLength = document.getElementById("userLength");
+  const userChars = document.getElementById("userChars");
+
+  if (!usernameInput || !userLength || !userChars) return false;
+
+  const value = usernameInput.value;
+  const isLongEnough = value.length >= 3;
+  const hasValidChars = /^[a-zA-Z0-9]*$/.test(value);
+
+  userLength.className = isLongEnough ? 'valid' : 'invalid';
+  userChars.className = hasValidChars ? 'valid' : 'invalid';
+
+  return isLongEnough && hasValidChars;
+}
+
+
+
+function validatePassword() {
+  const passwordInput = document.getElementById("regPassword");
+  const passLength = document.getElementById("passLength");
+  const passLetter = document.getElementById("passLetter");
+  const passDigit = document.getElementById("passDigit");
+
+  if (!passwordInput || !passLength || !passLetter || !passDigit) return false;
+
+  const value = passwordInput.value;
+  const isLongEnough = value.length >= 6;
+  const hasLetter = /[A-Za-z]/.test(value);
+  const hasDigit = /\d/.test(value);
+
+  passLength.className = isLongEnough ? 'valid' : 'invalid';
+  passLetter.className = hasLetter ? 'valid' : 'invalid';
+  passDigit.className = hasDigit ? 'valid' : 'invalid';
+
+  return isLongEnough && hasLetter && hasDigit;
+}
+
 
 // === DOMContentLoaded ===
 document.addEventListener('DOMContentLoaded', () => {
@@ -320,6 +372,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   checkAuth();
   loadAllNews();
+
+  const usernameInput = document.getElementById("regUsername");
+  const passwordInput = document.getElementById("regPassword");
+
+  if (usernameInput) {
+    usernameInput.addEventListener('input', validateUsername);
+  }
+
+  if (passwordInput) {
+    passwordInput.addEventListener('input', validatePassword);
+  }
 
   const buttons = document.querySelectorAll('.asideListFaq button');
   const contentBlocks = document.querySelectorAll('.content-block');
@@ -346,10 +409,15 @@ document.addEventListener('DOMContentLoaded', () => {
     registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      if (!validateUsername() || !validatePassword()) {
+        alert('Пожалуйста, проверьте имя пользователя и пароль.');
+        return;
+      }
+
       const username = registerForm.querySelector('input[type="text"]').value;
       const email = registerForm.querySelector('input[type="email"]').value;
       const password = registerForm.querySelector('input[type="password"]').value;
-
+      
       try {
         console.log('[Register] Попытка отправки запроса:', {
           username, email, password,
@@ -368,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('[Register] Ответ от сервера:', data);
       
         if (response.ok) {
-          alert('Регистрация прошла успешно!');
+          alert('Регистрация прошла успешно! Код с подтверждением был выслан вам на почту.');
           registerForm.reset();
           document.getElementById('registerModal').style.display = 'none';
         } else {
