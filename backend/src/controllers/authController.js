@@ -107,7 +107,7 @@ exports.login = async (req, res) => {
         }
 
         // Генерация токена
-        const tokenExpiresIn = rememberMe ? "7d" : "1d"; // 7 дней или 1 день
+        const tokenExpiresIn = rememberMe ? "31d" : "1d"; // 7 дней или 1 день
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: tokenExpiresIn,
         });

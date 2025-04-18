@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { signup, login }= require("../controllers/authController");
+const { signup, login, forgotPassword, resetPassword}= require("../controllers/authController");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User")
 
