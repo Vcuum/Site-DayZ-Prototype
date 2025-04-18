@@ -232,7 +232,7 @@ function initModals() {
   document.getElementById("resetPasswordForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const newPassword = e.target.newPassword.value;
-    const token = document.getElementById('resetTokenInput').value; // Получение токена
+    const token = e.target.token.value; // Получаем токен из формы
   
     try {
       const response = await fetch(`/api/auth/reset-password`, { // URL без :token

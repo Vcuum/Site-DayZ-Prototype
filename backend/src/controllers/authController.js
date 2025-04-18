@@ -163,6 +163,8 @@ exports.forgotPassword = async (req, res) => {
 exports.resetPassword = async (req, res) => {
     try {
         const { token, newPassword } = req.body;
+        console.log("[ResetPassword] Получен токен:", token); // Логируем токен
+
 
         const user = await User.findOne({
             resetPasswordToken: token,
@@ -170,6 +172,7 @@ exports.resetPassword = async (req, res) => {
         });
 
         if (!user) {
+            console.log("[ResetPassword] Токен недействителен:", token);
             return res.status(400).json({ message: "Токен недействителен или истек" });
         }
 
@@ -181,6 +184,7 @@ exports.resetPassword = async (req, res) => {
 
         res.status(200).json({ message: "Пароль успешно изменен" });
     } catch (error) {
+        console.error("[ResetPassword] Ошибка:", error);
         res.status(500).json({ message: "Ошибка сервера" });
     }
 };

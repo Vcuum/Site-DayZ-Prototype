@@ -180,11 +180,11 @@
         
         <!-- Модальное окно для ввода нового пароля -->
         <div id="resetPasswordModal" class="modal">
-            <input type="hidden" id="resetTokenInput" name="token">
             <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Введите новый пароль</h2>
             <form id="resetPasswordForm">
+                <input type="hidden" id="resetTokenInput" name="token">
                 <input type="password" name="newPassword" placeholder="Новый пароль" required>
                 <button type="submit">Сохранить</button>
             </form>
