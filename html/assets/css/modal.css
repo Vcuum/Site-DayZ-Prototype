@@ -73,6 +73,24 @@
   .modal-content button:hover {
     background-color: rgba(51, 205, 252, 0.2);;
   }
+  
+  .loginfunctions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .rememberMe input:hover {
+    cursor: pointer;
+  }
+
+  .rememberMe:hover {
+    cursor: pointer;
+  }
+
+  .forgot-password-link {
+    text-decoration: none;
+    color: white;
+  }
 
   .requirements {
     font-size: 12px;

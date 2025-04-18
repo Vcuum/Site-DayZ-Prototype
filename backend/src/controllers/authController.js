@@ -135,7 +135,7 @@ exports.forgotPassword = async (req, res) => {
         await user.save();
 
         // Отправка письма
-        const resetLink = `https://moonlight-owls.site/reset-password/${resetToken}`;
+        const resetLink = `https://moonlight-owls.site/${resetToken}`;
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -145,6 +145,7 @@ exports.forgotPassword = async (req, res) => {
         });
 
         await transporter.sendMail({
+            from: `"Moonlight Owls" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: "Сброс пароля",
             html: `<p>Для сброса пароля перейдите по ссылке:</p>
@@ -161,8 +162,7 @@ exports.forgotPassword = async (req, res) => {
 // Установка нового пароля
 exports.resetPassword = async (req, res) => {
     try {
-        const { token } = req.params;
-        const { newPassword } = req.body;
+        const { token, newPassword } = req.body;
 
         const user = await User.findOne({
             resetPasswordToken: token,

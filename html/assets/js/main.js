@@ -224,6 +224,7 @@ function initModals() {
 
   if (resetToken) {
     openModal("resetPasswordModal"); // Автоматически открыть окно сброса пароля
+    document.getElementById('resetTokenInput').value = resetToken; // Заполнение токена
     window.history.replaceState({}, document.title, window.location.pathname); // Убрать токен из URL
   }
 
@@ -231,12 +232,13 @@ function initModals() {
   document.getElementById("resetPasswordForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const newPassword = e.target.newPassword.value;
-    
+    const token = document.getElementById('resetTokenInput').value; // Получение токена
+  
     try {
-      const response = await fetch(`/api/auth/reset-password/${resetToken}`, {
+      const response = await fetch(`/api/auth/reset-password`, { // URL без :token
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ newPassword }),
+        body: JSON.stringify({ newPassword, token }), // Токен в теле
       });
       
       if (response.ok) {
