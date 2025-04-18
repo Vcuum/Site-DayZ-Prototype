@@ -231,8 +231,9 @@ function initModals() {
   // Отправка нового пароля
   document.getElementById("resetPasswordForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const newPassword = e.target.newPassword.value;
-    const token = e.target.token.value; // Получаем токен из формы
+    const formData = new FormData(e.target);
+    const newPassword = formData.get("newPassword");
+    const token = formData.get("token"); // Получаем токен из формы
   
     try {
       const response = await fetch(`/api/auth/reset-password`, { // URL без :token

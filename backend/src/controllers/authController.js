@@ -163,26 +163,37 @@ exports.forgotPassword = async (req, res) => {
 exports.resetPassword = async (req, res) => {
     try {
         const { token, newPassword } = req.body;
-        console.log("[ResetPassword] Получен токен:", token); // Логируем токен
+        console.log("[ResetPassword] Получен токен:", token);
 
+        // 1. Проверка формата токена
+        if (!token || token.length !== 40) {
+            return res.status(400).json({ message: "Некорректный токен" });
+        }
 
+        // 2. Поиск пользователя
         const user = await User.findOne({
             resetPasswordToken: token,
-            resetPasswordExpires: { $gt: Date.now() },
+            resetPasswordExpires: { $gt: Date.now() }
         });
 
         if (!user) {
-            console.log("[ResetPassword] Токен недействителен:", token);
+            console.log("[ResetPassword] Токен недействителен или истек:", token);
             return res.status(400).json({ message: "Токен недействителен или истек" });
         }
 
-        // Обновление пароля
+        // 3. Валидация пароля
+        if (newPassword.length < 6) {
+            return res.status(400).json({ message: "Пароль должен быть не менее 6 символов" });
+        }
+
+        // 4. Обновление данных
         user.password = await bcrypt.hash(newPassword, 10);
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
         await user.save();
 
         res.status(200).json({ message: "Пароль успешно изменен" });
+
     } catch (error) {
         console.error("[ResetPassword] Ошибка:", error);
         res.status(500).json({ message: "Ошибка сервера" });
