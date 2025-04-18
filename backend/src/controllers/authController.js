@@ -135,7 +135,7 @@ exports.forgotPassword = async (req, res) => {
         await user.save();
 
         // Отправка письма
-        const resetLink = `https://moonlight-owls.site/${resetToken}`;
+        const resetLink = `https://moonlight-owls.site/?token=${resetToken}`;
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {

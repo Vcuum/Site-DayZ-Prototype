@@ -227,7 +227,7 @@ function initModals() {
     document.getElementById('resetTokenInput').value = resetToken; // Заполнение токена
     window.history.replaceState({}, document.title, window.location.pathname); // Убрать токен из URL
   }
-
+  
   // Отправка нового пароля
   document.getElementById("resetPasswordForm").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -558,5 +558,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
  
+
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('token')) {
+    openModal('resetPasswordModal');
+  }
 
 });
