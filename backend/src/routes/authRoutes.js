@@ -6,6 +6,8 @@ const User = require("../models/User")
 
 router.post("/signup", signup);
 router.post("/login", login);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 
 const authMiddleware = require("../middleware/authMiddleware");
 

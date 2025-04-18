@@ -118,3 +118,63 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: "Ошибка сервера" });
     }
 };
+
+//"забыл пароль"
+exports.forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "Пользователь не найден" });
+        }
+
+        // Генерация токена сброса
+        const resetToken = crypto.randomBytes(20).toString("hex");
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 час
+        await user.save();
+
+        // Отправка письма
+        const resetLink = `https://moonlight-owls.site/reset-password/${resetToken}`;
+        const transporter = nodemailer.createTransport({ /* ... настройки ... */ });
+
+        await transporter.sendMail({
+            to: email,
+            subject: "Сброс пароля",
+            html: `<p>Для сброса пароля перейдите по ссылке:</p>
+                   <a href="${resetLink}">${resetLink}</a>`
+        });
+
+        res.status(200).json({ message: "Инструкции отправлены на email" });
+    } catch (error) {
+        res.status(500).json({ message: "Ошибка сервера" });
+    }
+};
+
+
+// Установка нового пароля
+exports.resetPassword = async (req, res) => {
+    try {
+        const { token } = req.params;
+        const { newPassword } = req.body;
+
+        const user = await User.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() },
+        });
+
+        if (!user) {
+            return res.status(400).json({ message: "Токен недействителен или истек" });
+        }
+
+        // Обновление пароля
+        user.password = await bcrypt.hash(newPassword, 10);
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+        await user.save();
+
+        res.status(200).json({ message: "Пароль успешно изменен" });
+    } catch (error) {
+        res.status(500).json({ message: "Ошибка сервера" });
+    }
+};

@@ -154,27 +154,100 @@ function updateCarouselFromNews(news) {
 function initModals() {
   console.log('[Init] Инициализация модальных окон');
 
+  // Функции для открытия/закрытия модалок по ID
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'block';
+  }
+
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'none';
+  }
+
   const loginModal = document.getElementById('loginModal');
   const registerModal = document.getElementById('registerModal');
   const loginBtn = document.getElementById('loginBtn');
   const registerBtn = document.getElementById('registerBtn');
   const closeBtns = document.querySelectorAll('.close');
 
-  
-
-  if (loginBtn) loginBtn.addEventListener('click', () => loginModal.style.display = 'block');
-  if (registerBtn) registerBtn.addEventListener('click', () => registerModal.style.display = 'block');
+  if (loginBtn) loginBtn.addEventListener('click', () => openModal('loginModal'));
+  if (registerBtn) registerBtn.addEventListener('click', () => openModal('registerModal'));
 
   closeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      loginModal.style.display = 'none';
-      registerModal.style.display = 'none';
+      closeModal('loginModal');
+      closeModal('registerModal');
+      closeModal('forgotPasswordModal');
+      closeModal('resetPasswordModal');
     });
   });
 
   window.addEventListener('click', (e) => {
-    if (e.target === loginModal) loginModal.style.display = 'none';
-    if (e.target === registerModal) registerModal.style.display = 'none';
+    if (e.target === loginModal) closeModal('loginModal');
+    if (e.target === registerModal) closeModal('registerModal');
+    if (e.target.id === 'forgotPasswordModal') closeModal('forgotPasswordModal');
+    if (e.target.id === 'resetPasswordModal') closeModal('resetPasswordModal');
+  });
+
+  // Открытие модального окна при клике на "Забыли пароль?"
+  document.querySelector(".forgot-password-link").addEventListener("click", () => {
+    openModal("forgotPasswordModal");
+  });
+
+  // Отправка email для восстановления
+  document.getElementById("forgotPasswordForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    
+    try {
+      const response = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      
+      if (response.ok) {
+        alert("Инструкции отправлены на ваш email");
+        closeModal("forgotPasswordModal");
+      } else {
+        alert("Ошибка: Пользователь не найден");
+      }
+    } catch (error) {
+      console.error("Ошибка:", error);
+    }
+  });
+
+  // Обработка токена из URL (если пользователь перешел по ссылке из письма)
+  const urlParams = new URLSearchParams(window.location.search);
+  const resetToken = urlParams.get("token");
+
+  if (resetToken) {
+    openModal("resetPasswordModal"); // Автоматически открыть окно сброса пароля
+    window.history.replaceState({}, document.title, window.location.pathname); // Убрать токен из URL
+  }
+
+  // Отправка нового пароля
+  document.getElementById("resetPasswordForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const newPassword = e.target.newPassword.value;
+    
+    try {
+      const response = await fetch(`/api/auth/reset-password/${resetToken}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newPassword }),
+      });
+      
+      if (response.ok) {
+        alert("Пароль успешно изменен!");
+        closeModal("resetPasswordModal");
+      } else {
+        alert("Ошибка: Токен недействителен");
+      }
+    } catch (error) {
+      console.error("Ошибка:", error);
+    }
   });
 }
 
@@ -481,4 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+ 
+
 });

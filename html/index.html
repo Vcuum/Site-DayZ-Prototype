@@ -125,9 +125,10 @@
             <form id="loginForm">
                 <input type="email" placeholder="Email" required>
                 <input type="password" placeholder="Пароль" required>
-                <label>
+                <label  class="rememberMe">
                     <input type="checkbox" name="rememberMe"> Запомнить меня
                 </label>
+                <a href="#" class="forgot-password-link">Забыли пароль?</a>
                 <button type="submit">Войти</button>
             </form>
         </div>
@@ -161,6 +162,30 @@
             </form>
         </div>
     </div>
+
+        <!-- Модальное окно для ввода email -->
+        <div id="forgotPasswordModal" class="modal">
+            <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Восстановление пароля</h2>
+            <form id="forgotPasswordForm">
+                <input type="email" name="email" placeholder="Ваш email" required>
+                <button type="submit">Отправить ссылку</button>
+            </form>
+            </div>
+        </div>
+        
+        <!-- Модальное окно для ввода нового пароля -->
+        <div id="resetPasswordModal" class="modal">
+            <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Введите новый пароль</h2>
+            <form id="resetPasswordForm">
+                <input type="password" name="newPassword" placeholder="Новый пароль" required>
+                <button type="submit">Сохранить</button>
+            </form>
+            </div>
+        </div>
 
     <!-- Скрипты -->
     <script type="module" src="./assets/js/main.js"></script>

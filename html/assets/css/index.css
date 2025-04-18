@@ -148,6 +148,10 @@ nav.nav ul li a:hover {
     color: white;
 }
 
+.rememberMe {
+    color: white;
+}
+
 /*..................Контейнер для боковой панели и основного блока........................ */
 
 .container {
