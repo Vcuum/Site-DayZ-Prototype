@@ -79,7 +79,7 @@ exports.signup = async (req, res) => {
 //Вход
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, rememberMe } = req.body;
         console.log("[Лог] Запрос на вход. Email:", email, "Пароль:", password);
 
         // Поиск пользователя с явным запросом пароля
